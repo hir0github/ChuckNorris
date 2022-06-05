@@ -104,7 +104,7 @@ class HomeState extends State<Home> {
                           },
                           color: Colors.amber[700],
                           iconSize: 60,
-                          icon: Icon(Icons.thumb_up_alt_outlined)),
+                          icon: const Icon(Icons.thumb_up_alt_outlined)),
                     ])))));
   }
 }
