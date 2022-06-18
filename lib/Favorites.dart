@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:math';
-import 'package:swipe/swipe.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'AppBar.dart';
 
 class Favorites extends StatefulWidget {
   List<Widget> favorites;

@@ -14,54 +14,22 @@ class Home extends StatefulWidget {
   HomeState createState() => HomeState();
 }
 
-final String picAPI =
-    'https://serpapi.com/search.json?engine=google&q=chuck+norris&google_domain=google.com&tbm=isch&ijn=0&api_key=0c1d759b8d4795a3c9f3847e923f3162bd873f3ba9fcd9a8f732a6d0fec1897b';
-final String jokesAPI = 'https://api.chucknorris.io/jokes/random';
-
-Future<String> getData(String url) async {
-  try {
-    var result = await http.get(Uri.parse(url));
-    return result.body;
-  } catch (error) {
-    return error.toString();
-  }
-}
-
-Future<String> getRandomPicture(String url) async {
-  try {
-    var result = await http.get(Uri.parse(url));
-
-    Map<String, dynamic> pictures = await jsonDecode(result.body);
-
-    var random = Random();
-    int n = random.nextInt(100);
-    String ans = await pictures['images_results'][n]['original'].toString();
-    return ans;
-  } catch (error) {
-    return error.toString();
-  }
-}
-
 class HomeState extends State<Home> {
-  List<Widget> FavoritesData = [];
+  final String picAPI =
+      'https://serpapi.com/search.json?engine=google&q=chuck+norris&google_domain=google.com&tbm=isch&ijn=0&api_key=0c1d759b8d4795a3c9f3847e923f3162bd873f3ba9fcd9a8f732a6d0fec1897b';
+  final String jokesAPI = 'https://api.chucknorris.io/jokes/random';
 
-  var Pictures = Picture();
-  var Jokes = Joke();
+  List<Widget> favoritesData = [];
 
-  bool LikebuttonPressed = false;
+  var pictures = Picture();
+  var jokes = JokeData('');
 
-  Widget LikebuttonBorder = Icon(
-    Icons.favorite_border,
-    color: Colors.red,
-  );
+  bool likeButtonPressed = false;
 
-  Widget LikebuttonFilled = Icon(
-    Icons.favorite,
-    color: Colors.red,
-  );
-  late var dataPic;
-  late var dataJoke;
+  late Future<String> dataPic;
+  late Future<String> dataJoke;
 
+  @override
   initState() {
     super.initState();
     dataJoke = getData(jokesAPI);
@@ -72,7 +40,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: appBar(context, FavoritesData),
+            appBar: appBar(context, favoritesData),
             backgroundColor: Colors.white,
             body: Swipe(
                 onSwipeLeft: () {
@@ -92,8 +60,8 @@ class HomeState extends State<Home> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Pictures.getPicture(dataPic),
-                                  Jokes.getJoke(dataJoke),
+                                  pictures.getPicture(dataPic),
+                                  jokes.getJoke(dataJoke),
                                 ],
                               ))),
                       Row(
@@ -104,7 +72,7 @@ class HomeState extends State<Home> {
                                 setState(() {
                                   dataJoke = getData(jokesAPI);
                                   dataPic = getRandomPicture(picAPI);
-                                  LikebuttonPressed = false;
+                                  likeButtonPressed = false;
                                 });
                               },
                               color: Colors.amber[700],
@@ -113,49 +81,71 @@ class HomeState extends State<Home> {
                           IconButton(
                             onPressed: () {
                               setState(() {
-                                LikebuttonPressed = !LikebuttonPressed;
+                                likeButtonPressed = !likeButtonPressed;
                               });
-                              if (LikebuttonPressed) {
-                                FavoritesData.add(Container(
-                                    margin: EdgeInsets.only(bottom: 25),
+                              if (likeButtonPressed) {
+                                favoritesData.add(Container(
+                                    margin: const EdgeInsets.only(bottom: 25),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Image.network(Pictures.savedLink,
+                                        Image.network(pictures.savedLink,
                                             width: 150,
                                             height: 150,
                                             fit: BoxFit.fill),
-                                        Text(Jokes.savedLink),
+                                        Text(jokes.joke),
                                       ],
                                     )));
                               } else {
-                                FavoritesData.removeLast();
+                                favoritesData.removeLast();
                               }
                             },
                             iconSize: 60,
-                            icon: (LikebuttonPressed)
-                                ? LikebuttonFilled
-                                : LikebuttonBorder,
+                            icon: Icon(
+                                likeButtonPressed
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: Colors.red),
                           )
                         ],
                       ),
                     ])))));
+  }
+
+  Future<String> getData(String url) async {
+    try {
+      var result = await http.get(Uri.parse(url));
+      return result.body;
+    } catch (error) {
+      return error.toString();
+    }
+  }
+
+  Future<String> getRandomPicture(String url) async {
+    try {
+      var result = await http.get(Uri.parse(url));
+
+      Map<String, dynamic> pictures = await jsonDecode(result.body);
+
+      var random = Random();
+      int n = random.nextInt(100);
+      String ans = pictures['images_results'][n]['thumbnail'].toString();
+      return ans;
+    } catch (error) {
+      return error.toString();
+    }
   }
 }
 
 @JsonSerializable()
 class JokeData {
   @JsonKey(name: 'value')
-  final String joke;
+  String joke;
   JokeData(this.joke);
   factory JokeData.fromJson(Map<String, dynamic> json) =>
       _$JokeDataFromJson(json);
   Map<String, dynamic> toJson() => _$JokeDataToJson(this);
-}
-
-class Joke {
-  late String savedLink;
 
   Widget getJoke(Future<String> data) {
     return Padding(
@@ -166,13 +156,10 @@ class Joke {
             if (snapshot.data == null) {
               return const CircularProgressIndicator();
             } else {
-              var newJoke =
-                  JokeData.fromJson(jsonDecode(snapshot.data.toString()));
-
-              savedLink = newJoke.joke;
-
+              joke =
+                  JokeData.fromJson(jsonDecode(snapshot.data.toString())).joke;
               return Center(
-                child: Text(newJoke.joke,
+                child: Text(joke,
                     style:
                         const TextStyle(fontFamily: 'Helvetica', fontSize: 16)),
               );
@@ -199,18 +186,9 @@ class Picture {
             if (snapshot.data == null) {
               return const CircularProgressIndicator();
             } else {
-              String url = snapshot.data.toString();
-              savedLink = url;
-
-              Widget tmp =
-                  Image.network(url, width: 250, height: 250, fit: BoxFit.fill,
-                      errorBuilder: (context, exception, stackTrace) {
-                return Image.network(
-                    'https://www.famousbirthdays.com/faces/norris-chuck-image.jpg',
-                    width: 250,
-                    height: 250);
-              });
-              return tmp;
+              savedLink = snapshot.data.toString();
+              return Image.network(savedLink,
+                  width: 250, height: 250, fit: BoxFit.fill);
             }
           },
         ));
