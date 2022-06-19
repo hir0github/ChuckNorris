@@ -14,21 +14,40 @@ class Home extends StatefulWidget {
 }
 
 bool likeButtonPressed = false;
+List<String> categories = [
+  "animal",
+  "career",
+  "celebrity",
+  "dev",
+  "explicit",
+  "fashion",
+  "food",
+  "history",
+  "money",
+  "movie",
+  "music",
+  "political",
+  "religion",
+  "science",
+  "sport",
+  "travel"
+];
+String currentCategory = 'animal';
 
 class HomeState extends State<Home> {
   var picture = Picture();
   var joke = Joke('');
 
-  void updateHomeScreen() {
+  void updateHomeScreen(String currentCategory) {
     likeButtonPressed = false;
-    joke.updateData();
+    joke.updateData(currentCategory);
     picture.updateData();
   }
 
   @override
   initState() {
     super.initState();
-    updateHomeScreen();
+    updateHomeScreen(currentCategory);
   }
 
   @override
@@ -38,8 +57,10 @@ class HomeState extends State<Home> {
             appBar: appBar(context, this),
             backgroundColor: Colors.white,
             body: Swipe(
-                onSwipeLeft: () => setState(() => updateHomeScreen()),
-                onSwipeRight: () => setState(() => updateHomeScreen()),
+                onSwipeLeft: () =>
+                    setState(() => updateHomeScreen(currentCategory)),
+                onSwipeRight: () =>
+                    setState(() => updateHomeScreen(currentCategory)),
                 child: Center(
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -59,8 +80,8 @@ class HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                              onPressed: () =>
-                                  setState(() => updateHomeScreen()),
+                              onPressed: () => setState(
+                                  () => updateHomeScreen(currentCategory)),
                               color: Colors.amber[700],
                               iconSize: 60,
                               icon: const Icon(Icons.thumb_up_alt_outlined)),

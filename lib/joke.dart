@@ -6,7 +6,7 @@ part 'joke.g.dart';
 
 @JsonSerializable()
 class Joke {
-  final String jokesAPI = 'https://api.chucknorris.io/jokes/random';
+  final String jokesAPI = 'https://api.chucknorris.io/jokes/random?category=';
   late Future<String> data;
 
   @JsonKey(name: 'value')
@@ -15,8 +15,8 @@ class Joke {
   factory Joke.fromJson(Map<String, dynamic> json) => _$JokeFromJson(json);
   Map<String, dynamic> toJson() => _$JokeToJson(this);
 
-  void updateData() {
-    data = getData();
+  void updateData(String currentCategory) {
+    data = getData(jokesAPI + currentCategory);
   }
 
   Widget getJoke() {
@@ -41,9 +41,9 @@ class Joke {
         ));
   }
 
-  Future<String> getData() async {
+  Future<String> getData(String url) async {
     try {
-      var result = await http.get(Uri.parse(jokesAPI));
+      var result = await http.get(Uri.parse(url));
       return result.body;
     } catch (error) {
       return error.toString();

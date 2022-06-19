@@ -7,12 +7,26 @@ PreferredSizeWidget? appBar(BuildContext context, HomeState homeScreen) {
       backgroundColor: Colors.amber[700],
       toolbarHeight: 40,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const Text(
             'Tinder with Chuck!',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black, fontSize: 18),
+          ),
+          DropdownButton<String>(
+            value: currentCategory,
+            onChanged: (String? newValue) {
+              homeScreen.setState(() {
+                currentCategory = newValue!;
+              });
+            },
+            items: categories.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
           ),
           Column(
             children: [
