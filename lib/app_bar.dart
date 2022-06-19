@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Favorites.dart';
-import 'Home.dart';
+import 'favorites.dart';
+import 'home.dart';
 
 PreferredSizeWidget? appBar(BuildContext context, HomeState homeScreen) {
   return AppBar(

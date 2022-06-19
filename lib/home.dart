@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:swipe/swipe.dart';
-import 'AppBar.dart';
+import 'app_bar.dart';
 import 'main.dart';
-import 'Joke.dart';
-import 'Picture.dart';
+import 'joke.dart';
+import 'picture.dart';
+import 'favorites.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
