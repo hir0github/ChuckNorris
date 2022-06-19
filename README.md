@@ -15,3 +15,5 @@ Random picture and joke of Chuck Norris using Google API (https://serpapi.com/) 
 * Favorites page supports deleting all favorite jokes, also you can click on each joke to enlarge it.
 * You can choose the category of joke.
 
+## APK
+Attached to files.
