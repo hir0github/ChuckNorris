@@ -10,7 +10,7 @@ Random picture and joke of Chuck Norris using Google API (https://serpapi.com/) 
 
 
 ## Features
-*Swipe left or right to change the joke and image of Chuck Norris.
-*Click for Like button to add it to favorites. Click again to delete from favorites.
-*Favorites page supports deleting all favorite jokes, also you can click on each joke to enlarge it.
+* Swipe left or right to change the joke and image of Chuck Norris.
+* Click for Like button to add it to favorites. Click again to delete from favorites.
+* Favorites page supports deleting all favorite jokes, also you can click on each joke to enlarge it.
 
