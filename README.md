@@ -6,7 +6,7 @@ Random picture and joke of Chuck Norris using Google API (https://serpapi.com/) 
 
 <img width="357" alt="Снимок экрана 2022-06-19 в 19 43 46" src="https://user-images.githubusercontent.com/64196918/174492203-db589754-df13-4b1a-9c84-24d4f99a3550.png">
 <img width="346" alt="Снимок экрана 2022-06-19 в 20 02 23" src="https://user-images.githubusercontent.com/64196918/174492274-e574f4ff-ffee-4188-b60d-4406a0e7ae78.png">!
-[Uploading Снимок экрана 2022-06-19 в 20.02.32.png…]()
+<img width="344" alt="Снимок экрана 2022-06-19 в 20 02 32" src="https://user-images.githubusercontent.com/64196918/174492338-ad95266a-6660-449e-85d7-249c1879e944.png">
 
 
 ## Features
