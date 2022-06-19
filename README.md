@@ -1,6 +1,6 @@
 # Tinder with Chuck!
 
-A Flutter mobile IOS/Android application.
+A Flutter mobile Android application.
 
 Random picture and joke of Chuck Norris using Google API (https://serpapi.com/) for picture and ChuckNorris.io (https://api.chucknorris.io/) for joke. You can click at ThumbsUp button to generate next joke and image.
 
@@ -11,3 +11,6 @@ Random picture and joke of Chuck Norris using Google API (https://serpapi.com/) 
 
 ## Features
 Swipe left or right to change the joke and image of Chuck Norris.
+Click for Like button to add it to favorites. Click again to delete from favorites.
+Favorites page supports deleting all favorite jokes, also you can click on each joke to enlarge it.
+
