@@ -38,6 +38,7 @@ dependencies:
   swipe: ^0.0.1
   firebase_core: ^1.18.0
   firebase_database: ^9.0.16
+  firebase_crashlytics: ^2.8.2
 
 dev_dependencies:
   flutter_test:

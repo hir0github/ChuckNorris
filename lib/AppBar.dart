@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Favorites.dart';
+import 'Home.dart';
 
-PreferredSizeWidget? appBar(BuildContext context, List<Widget> favoritesData) {
+PreferredSizeWidget? appBar(BuildContext context, HomeState homeScreen) {
   return AppBar(
       backgroundColor: Colors.amber[700],
       toolbarHeight: 40,
@@ -16,12 +17,13 @@ PreferredSizeWidget? appBar(BuildContext context, List<Widget> favoritesData) {
           Column(
             children: [
               InkWell(
-                child: Icon(Icons.favorite, size: 25.0, color: Colors.red),
+                child:
+                    const Icon(Icons.favorite, size: 25.0, color: Colors.red),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (BuildContext context) => const Favorites(),
+                      builder: (BuildContext context) => Favorites(homeScreen),
                     ),
                   );
                 },

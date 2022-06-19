@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "flutterchuck-8b929",
+    "chuck": "flutterchuck-8b929"
+  },
+  "targets": {}
+}

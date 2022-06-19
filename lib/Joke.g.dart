@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Home.dart';
+part of 'Joke.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-JokeData _$JokeDataFromJson(Map<String, dynamic> json) => JokeData(
+Joke _$JokeFromJson(Map<String, dynamic> json) => Joke(
       json['value'] as String,
     );
 
-Map<String, dynamic> _$JokeDataToJson(JokeData instance) => <String, dynamic>{
+Map<String, dynamic> _$JokeToJson(Joke instance) => <String, dynamic>{
       'value': instance.joke,
     };

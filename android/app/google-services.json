@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "482644148784",
+    "firebase_url": "https://flutterchuck-8b929-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "flutterchuck-8b929",
+    "storage_bucket": "flutterchuck-8b929.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482644148784:android:e268bd227855ba330ea3f5",
+        "android_client_info": {
+          "package_name": "com.example.helloworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482644148784-ih4nv06e73po0hsgk26sb4li77dp5023.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0xPeoEmNNHrhJ8Y6L0rI51F7xaB1Tl3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482644148784-ih4nv06e73po0hsgk26sb4li77dp5023.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "482644148784-0865o1vfo03o6g7v09tfldoqpfnsl61c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.helloworld"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

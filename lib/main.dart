@@ -1,14 +1,16 @@
 import 'dart:collection';
-
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-
 import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
   runApp(App());
 }
 
@@ -25,11 +27,11 @@ Future<SplayTreeMap<String, dynamic>> getFavorites() async {
 }
 
 class App extends StatelessWidget {
+  App({Key? key}) : super(key: key);
+
   final Future<FirebaseApp> _fireApp = Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
       name: "Tinder with Chuck");
-
-  App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
