@@ -21,8 +21,7 @@ PreferredSizeWidget? appBar(BuildContext context, List<Widget> favoritesData) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          Favorites(favoritesData),
+                      builder: (BuildContext context) => const Favorites(),
                     ),
                   );
                 },

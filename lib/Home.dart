@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -5,6 +6,7 @@ import 'dart:math';
 import 'package:swipe/swipe.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'AppBar.dart';
+import 'main.dart';
 part 'Home.g.dart';
 
 class Home extends StatefulWidget {
@@ -79,26 +81,23 @@ class HomeState extends State<Home> {
                               iconSize: 60,
                               icon: const Icon(Icons.thumb_up_alt_outlined)),
                           IconButton(
-                            onPressed: () {
+                            onPressed: () async {
                               setState(() {
                                 likeButtonPressed = !likeButtonPressed;
                               });
+
                               if (likeButtonPressed) {
-                                favoritesData.add(Container(
-                                    margin: const EdgeInsets.only(bottom: 25),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Image.network(pictures.savedLink,
-                                            width: 150,
-                                            height: 150,
-                                            fit: BoxFit.fill),
-                                        Text(jokes.joke),
-                                      ],
-                                    )));
+                                await database.push().set({
+                                  'joke': jokes.joke,
+                                  'image': pictures.savedLink
+                                });
                               } else {
-                                favoritesData.removeLast();
+                                var data = await getFavorites();
+
+                                var sortedKeys = data.keys.toList()..sort();
+                                String lastKey =
+                                    sortedKeys[sortedKeys.length - 1];
+                                await database.child(lastKey).remove();
                               }
                             },
                             iconSize: 60,
